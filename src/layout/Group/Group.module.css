@@ -1,0 +1,14 @@
+.groupWrapper {
+  display: flex;
+  width: 100%;
+}
+
+.addGroup {
+  /* width: 200px; */
+  border: none;
+  text-align: center;
+  font-size: 1.3em;
+  color: #2d61c6;
+  margin-right: 15px;
+  cursor: pointer;
+}

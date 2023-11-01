@@ -1,0 +1,26 @@
+.wrapper {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.table {
+  width: 100%;
+  color: var(--dark);
+  background: var(--light);
+  border: 1px solid var(--dark);
+  border-radius: 20px;
+  padding: 0.8em;
+  font-size: 1.2em;
+}
+
+.thead {
+  text-align: left;
+}
+
+.thead th {
+  min-width: 100px;
+}
+
+.thead th:first-child {
+  width: 20px;
+}

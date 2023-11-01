@@ -1,0 +1,17 @@
+.header {
+  background: var(--dark);
+  height: 50px;
+  border-radius: 0 0 20px 20px;
+  padding: 10px 100px;
+  width: 100%;
+  display: flex;
+  color: var(--light);
+  justify-content: space-around;
+  font-size: 1.3em;
+}
+
+.header a {
+  color: var(--light);
+  text-decoration: none;
+  margin-right: 20px;
+}
