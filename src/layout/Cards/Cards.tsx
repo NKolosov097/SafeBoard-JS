@@ -1,11 +1,11 @@
-import { ICard } from "../../types"
+import { IUser } from "../../types"
 import styles from "./Cards.module.css"
 import { CgProfile } from "react-icons/cg"
 
 export const Cards = ({
   users,
 }: {
-  users: Array<ICard>
+  users: Array<IUser>
 }): React.JSX.Element => {
   return (
     <>

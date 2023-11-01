@@ -1,11 +1,11 @@
 import React from "react"
-import { ICard } from "../../types"
+import { IUser } from "../../types"
 import styles from "./Table.module.css"
 
 export const Table = ({
   users,
 }: {
-  users: Array<ICard>
+  users: Array<IUser>
 }): React.JSX.Element => {
   return (
     <div className={styles.wrapper}>

@@ -4,7 +4,7 @@ export const enum Status {
   error = "error",
 }
 
-export interface ICard {
+export interface IUser {
   id: number
   first_name: string
   last_name: string
@@ -15,18 +15,31 @@ export interface ICard {
 }
 
 export interface ICardsSlicer {
-  data: Array<ICard> | Error
+  data: Array<IUser> | Error
   status: Status
 }
 
+export interface IGroup {
+  id: string
+  title?: string
+  users?: Array<IUser> | []
+}
+
+export interface IGroupsSlicer {
+  groups: Array<IGroup>
+}
+
 export interface ISearchProps {
+  isGroups?: boolean
   value: string
   onChange: (event: string) => void
 }
 
 export interface IPanelProps extends ISearchProps {
-  users: Array<ICard>
-  setUsers: (cards: Array<ICard>) => void
+  groups?: Array<IGroup>
+  setGroups?: (groups: Array<IGroup>) => void
+  users: Array<IUser>
+  setUsers: (cards: Array<IUser>) => void
 }
 
 export const enum StateOfSort {

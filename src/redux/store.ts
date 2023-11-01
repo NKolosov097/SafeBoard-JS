@@ -1,8 +1,14 @@
-import { configureStore } from "@reduxjs/toolkit"
+import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import { cardsReducer } from "./slices/cards"
+import { groupsReducer } from "./slices/groups"
+
+const reducer = combineReducers({
+  cards: cardsReducer,
+  groups: groupsReducer,
+})
 
 const store = configureStore({
-  reducer: cardsReducer,
+  reducer: reducer,
 })
 
 export default store

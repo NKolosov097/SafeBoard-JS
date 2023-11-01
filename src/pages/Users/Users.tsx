@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import styles from "./Users.module.css"
 import { useAppSelector } from "../../hooks"
 import cn from "classnames"
-import { ICard } from "../../types"
+import { IUser } from "../../types"
 import { Table } from "../../layout/Table/Table"
 import { Cards } from "../../layout/Cards/Cards"
 import { Group } from "../../layout/Group/Group"
@@ -33,10 +33,10 @@ const initialState: Array<IView> = [
 ]
 
 export const Users = (): React.JSX.Element => {
-  const data = useAppSelector((state) => state.data) as Array<ICard>
+  const data = useAppSelector((state) => state.cards.data) as Array<IUser>
 
   const [view, setView] = useState<Array<IView>>(initialState)
-  const [users, setUsers] = useState<Array<ICard>>(data)
+  const [users, setUsers] = useState<Array<IUser>>(data)
   const [inputValue, setInputValue] = useState<string>("")
 
   useEffect(() => {
@@ -77,12 +77,14 @@ export const Users = (): React.JSX.Element => {
 
       <hr />
 
-      <Panel
-        users={users}
-        setUsers={setUsers}
-        value={inputValue}
-        onChange={setInputValue}
-      />
+      {!view[2]?.active && (
+        <Panel
+          users={users}
+          setUsers={setUsers}
+          value={inputValue}
+          onChange={setInputValue}
+        />
+      )}
 
       {view[0]?.active && <Table users={users} />}
       {view[1]?.active && <Cards users={users} />}

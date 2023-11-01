@@ -1,9 +1,12 @@
 import React, { useState } from "react"
-import { IPanelProps, StateOfSort } from "../../types"
+import { IGroup, IPanelProps, StateOfSort } from "../../types"
 import { Search } from "../Search/Search"
 import styles from "./Panel.module.css"
 
 export const Panel = ({
+  isGroups,
+  setGroups,
+  groups,
   users,
   setUsers,
   value,
@@ -13,6 +16,7 @@ export const Panel = ({
     StateOfSort.ascending
   )
   const [sortByName, setSortByName] = useState<StateOfSort>(StateOfSort.null)
+  const [isSortByGroupTitle, setIsSortByGroupTitle] = useState<boolean>(true)
 
   // Вспомогательная функция для сортировки по имени. При этом сортировка по ID отключается
   const handleSortByName = () => {
@@ -38,6 +42,26 @@ export const Panel = ({
     })
 
     setUsers(usersCopy)
+  }
+
+  const handleSortByGroupTitle = () => {
+    const groupsCopy = [...(groups as Array<IGroup>)]
+
+    setIsSortByGroupTitle(!isSortByGroupTitle)
+
+    groupsCopy.sort((a, b) => {
+      if (a.title && b.title) {
+        if (a.title.toLowerCase() < b.title.toLowerCase()) {
+          return isSortByGroupTitle ? -1 : 1
+        }
+        if (a.title.toLowerCase() > b.title.toLowerCase()) {
+          return isSortByGroupTitle ? 1 : -1
+        }
+      }
+      return 0
+    })
+
+    setGroups && setGroups(groupsCopy)
   }
 
   // Вспомогательная функция для сортировки по ID. При этом сортировка по имени отключается
@@ -68,27 +92,40 @@ export const Panel = ({
 
   return (
     <div className={styles.panelWrapper}>
-      <button className={styles.sortItem} onClick={handleSortByNumber}>
-        {sortByNumber === StateOfSort.ascending
-          ? `От ${users[0]?.id || "😟"} до ${
-              users[users.length - 1]?.id || "😊"
-            } ↑`
-          : sortByNumber === StateOfSort.descending
-          ? `От ${users[0]?.id || "😊"} до ${
-              users[users.length - 1]?.id || "😟"
-            } ↓`
-          : "Не отсортировано"}
-      </button>
+      {!isGroups ? (
+        <button className={styles.sortItem} onClick={handleSortByNumber}>
+          {sortByNumber === StateOfSort.ascending
+            ? `От ${users[0]?.id || "😟"} до ${
+                users[users.length - 1]?.id || "😊"
+              } ↑`
+            : sortByNumber === StateOfSort.descending
+            ? `От ${users[0]?.id || "😊"} до ${
+                users[users.length - 1]?.id || "😟"
+              } ↓`
+            : "Не отсортировано"}
+        </button>
+      ) : (
+        <div className={styles.groupItem} />
+      )}
 
-      <Search value={value} onChange={onChange} />
+      <Search isGroups={isGroups} value={value} onChange={onChange} />
 
-      <button className={styles.sortItem} onClick={handleSortByName}>
-        {sortByName === StateOfSort.ascending
-          ? "От A до Z ↑"
-          : sortByName === StateOfSort.descending
-          ? "От Z до A ↓"
-          : "Не отсортировано"}
-      </button>
+      {!isGroups ? (
+        <button className={styles.sortItem} onClick={handleSortByName}>
+          {sortByName === StateOfSort.ascending
+            ? "От A до Z ↑"
+            : sortByName === StateOfSort.descending
+            ? "От Z до A ↓"
+            : "Не отсортировано"}
+        </button>
+      ) : (
+        <button
+          className={styles.SortItemGroup}
+          onClick={handleSortByGroupTitle}
+        >
+          {isSortByGroupTitle ? "От A до Z ↑" : "От Z до A ↓"}
+        </button>
+      )}
     </div>
   )
 }

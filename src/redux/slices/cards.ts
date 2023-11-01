@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { ICard, ICardsSlicer, Status } from "../../types"
+import { IUser, ICardsSlicer, Status } from "../../types"
 import dataCards from "../../data.json"
 
 export const getData = () => {
@@ -14,7 +14,7 @@ export const fetchGetCards = createAsyncThunk(
     try {
       const data = await getData().catch((err) => console.log(err))
 
-      return data as Array<ICard>
+      return data as Array<IUser>
     } catch (error) {
       return new Error(error as unknown as string)
     }

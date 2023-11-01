@@ -12,7 +12,7 @@ function App(): React.JSX.Element {
 
   useEffect(() => {
     dispatch(fetchGetCards())
-  }, [])
+  }, [dispatch])
 
   return (
     <>

@@ -20,6 +20,7 @@
   font-size: 1.2em;
   margin-right: 15px;
   cursor: pointer;
+  background: var(--light);
 }
 
 .view:last-child {
